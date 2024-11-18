@@ -1,0 +1,45 @@
+package db;
+
+import db.services.CountryService;
+import db.services.EventService;
+import db.services.PlayerService;
+
+public class Main {
+    public static void main(String[] args) {
+        PlayerService playerService = new PlayerService();
+        EventService eventService = new EventService();
+        CountryService countryService = new CountryService();
+
+        // Задание 1: Для Олимпийских игр 2004 года сгенерируйте список
+        System.out.println("Задание 1: Игроки с золотыми медалями в 2004 году");
+        playerService.getPlayersWithGoldMedalsIn2004().forEach(record -> {
+            System.out.printf("Год рождения: %s, Количество игроков: %d, Количество золотых медалей: %d%n",
+                    record[0].toString(), ((Long) record[1]).intValue(), ((Long) record[2]).intValue());
+        });
+
+        // Задание 2: Перечислите все индивидуальные соревнования с ничьей и золотыми медалями
+        System.out.println("\nЗадание 2: Индивидуальные соревнования с ничьей и золотыми медалями");
+        eventService.getIndividualEventsWithTies().forEach(record -> {
+            System.out.printf("Событие: %s, Количество золотых медалей: %d%n",
+                    record[0].toString(), ((Long) record[1]).intValue());
+        });
+
+        // Задание 3: Найдите всех игроков, выигравших хотя бы одну медаль на одной Олимпиаде
+        System.out.println("\nЗадание 3: Игроки, выигравшие хотя бы одну медаль на одной Олимпиаде");
+        playerService.getPlayersWithMedals().forEach(record -> {
+            System.out.printf("Имя игрока: %s, Олимпиада: %s%n", record[0].toString(), record[1].toString());
+        });
+
+        // Задание 4: В какой стране был наибольший процент игроков, чьи имена начинались с гласной
+        System.out.println("\nЗадание 4: Страна с наибольшим процентом игроков с именами на гласную");
+        String countryWithHighestPercentage = playerService.getCountryWithHighestPercentageOfPlayersWithVowelStart();
+        System.out.println("Страна: " + countryWithHighestPercentage);
+
+        // Задание 5: Найдите 5 стран с минимальным соотношением групповых медалей к численности населения для Олимпийских игр 2000 года
+        System.out.println("\nЗадание 5: Страны с минимальным соотношением групповых медалей к численности населения в 2000 году");
+        countryService.getCountriesWithLowestTeamMedalRatio(5).forEach(record -> {
+            System.out.printf("Страна: %s, Соотношение: %.6f%n",
+                    record[0].toString(), (Double) record[1]);
+        });
+    }
+}
