@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>hw-7_db</artifactId>
+    <artifactId>db_hws</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
