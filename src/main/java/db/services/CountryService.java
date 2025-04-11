@@ -24,6 +24,8 @@ public class CountryService {
             Query<Object[]> query = session.createQuery(hql, Object[].class);
             List<Object[]> results = query.list();
 
+            System.out.println("lolkek");
+
             return results.stream()
                     .map(row -> new Object[]{row[0], (long) row[1] * 1.0 / (long) row[2]})
                     .sorted(Comparator.comparingDouble(a -> (double) a[1]))
@@ -32,5 +34,3 @@ public class CountryService {
         }
     }
 }
-
-//lolkekchebureklolлулasdf
